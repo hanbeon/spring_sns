@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springSns.sns.main.service.impl.MainMapper">
+	
+	<insert id="insertPost" parameterType="postVO">
+		INSERT INTO SNS_POST
+		            (
+		            	SP_TITLE,
+		            	SP_CONTENTS,
+		            	SP_AUTHOR,
+		            	SP_EMAIL,
+		            	SP_REG_DT
+		            )
+		     VALUES (
+		            	#{postTitle},
+		            	#{postContents},
+		            	#{author},
+		            	#{email},
+		            	now()
+		            )
+	</insert>
+	
+	<select id="getSnsPostList" parameterType="postVO" resultType="postVO">
+		SELECT SP_TITLE AS postTitle,
+		       SP_CONTENTS AS postContents,
+		       SP_AUTHOR AS author,
+		       SP_EMAIL AS email,
+		       SP_REG_DT AS regDt
+		  FROM SNS_POST
+		ORDER BY SP_REG_DT DESC
+	</select>
+</mapper>

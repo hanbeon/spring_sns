@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="formValidator">
+
+	<select id="emailOverlap" parameterType="String" resultType="Integer">
+		SELECT count(*)
+		 FROM  member
+		 WHERE MB_EMAIL = #{_parameter}
+	</select>
+	
+	<select id="selectOneMemberCnt" parameterType="HashMap" resultType="Integer">
+		SELECT count(*)
+		  FROM MEMBER
+		 WHERE MB_EMAIL = #{email}
+		   AND MB_PASSWORD = #{password}
+	</select>
+	
+	<select id="selectOneMember"  parameterType="HashMap" resultType="HashMap">
+		SELECT MB_ID         AS Id,
+			   MB_FIRST_NAME AS FirstName,
+			   MB_LAST_NAME  AS LastName,
+			   MB_EMAIL      AS Email
+		  FROM MEMBER
+		 WHERE MB_EMAIL = #{email}
+		   AND MB_PASSWORD = #{password}
+	</select>
+	
+</mapper>

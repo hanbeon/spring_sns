@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springSns.sns.login.service.impl.LoginMapper">
+
+	<select id="testList" parameterType="loginVO" resultType="loginVO">
+		SELECT * FROM member
+	</select>
+	
+	<insert id="insertMember" parameterType="loginVO">
+		INSERT INTO MEMBER
+		(
+			MB_ID,
+			MB_FIRST_NAME ,
+			MB_LAST_NAME  ,
+			MB_EMAIL      ,
+			MB_PASSWORD   ,
+			MB_REGI_DT
+			
+		) 
+		VALUES(
+		
+			#{id},
+			#{firstName},
+			#{lastName} ,
+			#{email}    ,
+			#{password} ,
+			now()
+		)
+		
+	</insert>
+	
+	<select id="emailOverlap" parameterType="String" resultType="Integer">
+		SELECT count(*)
+		 FROM  member
+		 WHERE email = #{_parameter}
+	</select>
+	
+	<insert id="insertAccessLogin" parameterType="loginVO">
+		INSERT INTO ACCESS_LOGIN
+		(
+			AL_ID,
+			AL_EMAIL,
+			AL_ACCESS_TIME,
+			AL_ACCESS_IP
+		)
+		VALUES
+		(
+			#{id},
+			#{email},
+			now(),
+			#{accessIp}
+		)
+	</insert>
+</mapper>

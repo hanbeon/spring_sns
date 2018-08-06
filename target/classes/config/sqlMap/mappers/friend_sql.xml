@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springSns.sns.friend.service.impl.FriendMapper">
+
+	<insert id="addTempFriend" parameterType="friendVO">
+		INSERT INTO TEMP_FRIENDS
+		(
+			TF_EMAIL,
+			TF_TO_EMAIL,
+			TF_REG_DATE
+		)
+		VALUES
+		(
+			#{email},
+			#{toEmail},
+			now()
+		)
+	</insert>
+
+	<select id="selectSearchFriends" parameterType="commonVO" resultType="friendVO">
+		SELECT mb.MB_ID         AS Id,
+			   mb.MB_FIRST_NAME AS FirstName,
+			   mb.MB_LAST_NAME  AS LastName,
+			   mb.MB_EMAIL      AS Email
+		  FROM MEMBER mb
+	 	LEFT JOIN TEMP_FRIENDS tf
+	 		ON mb.MB_EMAIL = tf.TF_EMAIL
+            AND tf.TF_EMAIL != #{email}
+		 WHERE 1=1
+           AND mb.MB_EMAIL LIKE CONCAT(#{searchText}, '%') 
+           AND mb.MB_EMAIL != #{email}
+<!-- 		SELECT mb.MB_ID         AS Id,
+			   mb.MB_FIRST_NAME AS FirstName,
+			   mb.MB_LAST_NAME  AS LastName,
+			   mb.MB_EMAIL      AS Email,
+			   IFNULL(tf.TF_TO_EMAIL,'') As toEmail
+		  FROM MEMBER mb
+	 	LEFT JOIN TEMP_FRIENDS tf
+	 		ON mb.MB_EMAIL = tf.TF_TO_EMAIL
+		 WHERE 1=1
+		<choose>
+			<when test=" ( ''.equals( searchText ) ) or (searchText == null) ">
+				AND mb.MB_EMAIL = '' 
+			</when>
+			<otherwise>
+				AND mb.MB_EMAIL LIKE CONCAT(#{searchText}, '%') AND mb.MB_EMAIL != #{email} 
+			</otherwise>
+		</choose> -->
+	</select>
+	
+	<select id="selectTempFriendExistence" parameterType="friendVO" resultType="Integer">
+		SELECT count(*)
+		  FROM TEMP_FRIENDS
+		 WHERE TF_EMAIL = #{email}
+		   AND TF_TO_EMAIL = #{toEmail} 
+	</select>
+	
+	<select id="selectRequestFriends" parameterType="String" resultType="friendVO">
+		SELECT mb.MB_ID         AS Id,
+			   mb.MB_FIRST_NAME AS FirstName,
+			   mb.MB_LAST_NAME  AS LastName,
+			   mb.MB_EMAIL      AS Email,
+			   IFNULL(tf.TF_TO_EMAIL,'') As toEmail,
+			   tf.TF_STATE      as State
+		  FROM MEMBER mb
+	 	INNER JOIN TEMP_FRIENDS tf
+	 		ON mb.MB_EMAIL = tf.TF_TO_EMAIL
+		 WHERE 1=1
+		    AND tf.TF_EMAIL = #{_parameter}
+	</select>
+	
+	<select id="selectResponseFirends" parameterType="String" resultType="friendVO">
+		SELECT mb.MB_ID         AS Id,
+			   mb.MB_FIRST_NAME AS FirstName,
+			   mb.MB_LAST_NAME  AS LastName,
+			   mb.MB_EMAIL      AS Email,
+			   IFNULL(tf.TF_TO_EMAIL,'') As toEmail,
+			   tf.TF_STATE      as State
+		  FROM MEMBER mb
+	 	INNER JOIN TEMP_FRIENDS tf
+	 		ON mb.MB_EMAIL = tf.TF_EMAIL
+		 WHERE 1=1
+		   AND tf.TF_TO_EMAIL = #{_parameter}
+	</select>
+	
+	<select id="selectFriendCnt" parameterType="friendVO" resultType="integer">
+		SELECT COUNT(*)
+		  FROM FRIENDS
+		 WHERE FR_EMAIL = #{email}
+		   AND FR_TO_EMAIL = #{toEmail}
+	</select>
+	
+	<insert id="addFriend" parameterType="friendVO">
+		INSERT INTO FRIENDS
+			(
+				FR_EMAIL,
+				FR_TO_EMAIL,
+				FR_REG_DATE
+			)
+		VALUES
+			(
+				#{email},
+				#{toEmail},
+				now()
+			)
+	</insert>
+	
+	<update id="updateTempFriend" parameterType="friendVO">
+		UPDATE TEMP_FRIENDS
+		   SET TF_STATE = #{state}
+		 WHERE TF_EMAIL = #{email}
+	</update>
+	
+	<select id="getFriends" parameterType="String" resultType="friendVO">
+		SELECT FR_TO_EMAIL   AS toEmail
+		      ,MB_FIRST_NAME AS firstName
+		      ,MB_LAST_NAME  AS lastName
+		  FROM FRIENDS FR
+		 INNER JOIN MEMBER MB 
+		    ON FR.FR_EMAIL = MB.MB_EMAIL
+		 WHERE MB_EMAIL = #{_parameter}
+	</select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springSns.sns.member.service.impl.MemberMapper">
+	<select id="selectOneMember" parameterType="commonVO" resultType="loginVO">
+		SELECT MB_ID         AS Id,
+			   MB_FIRST_NAME AS FirstName,
+			   MB_LAST_NAME  AS LastName,
+			   MB_EMAIL      AS Email
+		  FROM MEMBER
+		 WHERE 1=1
+		   AND MB_EMAIL = #{searchText}
+	</select>
+	
+	<select id="selectSearchMember" parameterType="commonVO" resultType="loginVO">
+		SELECT MB_ID         AS Id,
+			   MB_FIRST_NAME AS FirstName,
+			   MB_LAST_NAME  AS LastName,
+			   MB_EMAIL      AS Email
+		  FROM MEMBER
+		 WHERE 1=1
+		<choose>
+			<when test=" ( ''.equals( searchText ) ) or (searchText == null) ">
+				AND MB_EMAIL = ''
+			</when>
+			<otherwise>
+				AND MB_EMAIL LIKE CONCAT(#{searchText}, '%')
+			</otherwise>
+		</choose>
+	</select>
+	
+</mapper>

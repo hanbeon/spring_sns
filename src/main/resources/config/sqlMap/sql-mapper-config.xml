@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- VO 낙타법 자동 매칭  설정. 기본값 False -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias alias="loginVO"  type="com.springSns.sns.login.service.LoginVO"/>
+		<typeAlias alias="postVO"   type="com.springSns.sns.main.service.PostVO"/>
+		<typeAlias alias="commonVO" type="com.springSns.sns.common.CommonVO"/>
+		<typeAlias alias="friendVO" type="com.springSns.sns.friend.service.FriendVO"/>
+	</typeAliases>
+</configuration>

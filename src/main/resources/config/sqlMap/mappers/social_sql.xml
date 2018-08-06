@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springSns.sns.social.service.impl.SocialMapper">
+	
+	<select id="selectSocialId" parameterType="String" resultType="hashMap">
+		SELECT SOCIAL_SYNC_ID,
+		       SOCIAL_SYNC_TOKEN_KEY,
+		       SOCIAL_STATE
+		  FROM SOCIAL_MAPPING
+		 WHERE SOCIAL_SYNC_ID = #{_parameter}
+		   AND SOCIAL_STATE = 'Y'
+	</select>
+	
+	<update id="updateTokenKey" parameterType="hashMap">
+		UPDATE SOCIAL_MAPPING SM
+		   SET SM.SOCIAL_SYNC_TOKEN_KEY = #{socialSyncTokenKey}
+		 WHERE SM.SOCIAL_SYNC_ID = #{socialSyncId}
+		   AND SM.SOCIAL_STATE = 'Y'
+	</update>
+</mapper>

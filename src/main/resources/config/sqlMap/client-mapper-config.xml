@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- VO 낙타법 자동 매칭  설정. 기본값 False -->
+<!--  	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings> -->
+	
+	<!-- <properties resource="/WEB-INF/config/globalsProp/globals.properties"/> -->
+	
+	<environments default="development">
+	
+		<environment id="development">
+		
+		<transactionManager type="JDBC" />
+		
+		<dataSource type="POOLED">
+		
+			<property name="driver" value="com.mysql.jdbc.Driver" />
+			
+			<!-- TODO :: 로컬 // 개발  -->
+			<property name="url" value="jdbc:mysql://127.0.0.1:3306/jm_sns" />
+			<!-- <property name="url" value="jdbc:mysql://172.30.1.5:3306/jm_sns" />-->
+			
+			<property name="username" value="jm" />
+			
+			<property name="password" value="jm" />
+			
+		</dataSource>
+		
+		</environment>
+	
+	</environments>
+
+	<mappers>
+		<!-- <mapper resource="classpath:/config/sqlMap/clientMappers/client_sql.xml"/> -->
+		<mapper resource="/config/sqlMap/clientMappers/client_sql.xml"/>
+	</mappers>
+	
+</configuration>

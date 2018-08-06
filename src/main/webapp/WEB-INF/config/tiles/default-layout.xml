@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<!--  Main Layout Setting -->
+	<definition name="layouts-tiles"            template="/WEB-INF/views/common/tiles/default-layouts.jsp">
+		<put-attribute name="header"            value="/WEB-INF/views/common/tiles/default-header.jsp"/>
+		<put-attribute name="nav"               value="/WEB-INF/views/common/tiles/default-nav.jsp"/>
+		<put-attribute name="left"              value="/WEB-INF/views/common/tiles/default-left.jsp"/>
+		<put-attribute name="right"              value="/WEB-INF/views/common/tiles/default-right.jsp"/>
+		<put-attribute name="content"           value=""/>
+	</definition>
+	
+	<definition name="*.tiles" extends="layouts-tiles">
+		<put-attribute name="content"           value="/WEB-INF/views/{1}.jsp"/>
+	</definition>
+	
+	<definition name="*/*.tiles" extends="layouts-tiles">
+		<put-attribute name="content"           value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+
+	
+	<!--  Login Layout Setting -->
+	<definition name="login-tiles"              template="/WEB-INF/views/common/tiles/login/login-layouts.jsp">
+		<put-attribute name="header"            value="/WEB-INF/views/common/tiles/default-header.jsp"/>
+		<put-attribute name="content"           value=""/>
+	</definition>
+	
+	<definition name="*/*.login-tiles"          extends="login-tiles">
+		<put-attribute name="content"           value="/WEB-INF/views/login/{1}.jsp"/>
+	</definition>
+	
+</tiles-definitions>

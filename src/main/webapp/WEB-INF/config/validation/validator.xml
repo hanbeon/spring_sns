@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC 
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN" 
+    "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
+    
+<form-validation>
+	<formset>
+	<!--  member  -->
+		<form name="loginVO">
+			<field property="firstName"  depends="required, hangul">
+				<arg0 key="loginVO.firstName"/>
+			</field>
+			
+			<field property="lastName"   depends="required, hangul">
+				<arg0 key="loginVO.lastName"/>
+			</field>
+			
+			<field property="email"      depends="required, email, emailOverlap">
+				<arg0 key="loginVO.email"/>
+			</field>
+			
+			<field property="password"   depends="required, passwordCheck, minlength ,maxlength">
+				<arg0 key="loginVO.password"/>
+				<arg1 key="${var:minlength}" name="minlegth"/>
+				<arg1 key="${var:maxlength}" name="maxlength"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>7</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>13</var-value>
+				</var>
+			</field>
+			
+			<field property="rePassword" depends="required, passwordCheck, rePasswordCheck, minlength ,maxlength">
+				<arg0 key="loginVO.rePassword"/>
+				<arg1 key="${var:minlength}" name="minlegth"/>
+				<arg1 key="${var:maxlength}" name="maxlength"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>7</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>16</var-value>
+				</var>
+			</field>
+			
+		</form>
+		
+		<form name="postVO">
+			<field property="postName" depends="require">
+				<arg0 key="postVO.name"/>
+			</field>
+		</form>
+	</formset>
+</form-validation>
