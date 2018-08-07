@@ -2,6 +2,7 @@ package com.springSns.sns.common.handler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -14,6 +15,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class WebSocketHandler extends TextWebSocketHandler{
 
@@ -23,7 +26,13 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
+		ObjectMapper mapper = new ObjectMapper();
+		
 		logger.info("{} 접속," + session.getId() + "\t" + session.getPrincipal().getName());
+		Map<String,Object> map = session.getAttributes();
+		System.out.println("Size::"+map.size());
+		System.out.println(map.get("userEmail"));
+		System.out.println(mapper.writeValueAsString(map));
 		wbSessionList.add(session);
 	}
 	

@@ -7,9 +7,14 @@
 						http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd">
 						
 	<bean id="webSocketHandler" class="com.springSns.sns.common.handler.WebSocketHandler"/>
+
 	<websocket:handlers>
 		<websocket:mapping handler="webSocketHandler" path="/webSocket"/>
-		<websocket:sockjs/>
+		<!--
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors> -->
+		<!-- <websocket:sockjs /> -->
 	</websocket:handlers>
 	
 </beans>

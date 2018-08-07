@@ -117,7 +117,7 @@
 		      ,MB_LAST_NAME  AS lastName
 		  FROM FRIENDS FR
 		 INNER JOIN MEMBER MB 
-		    ON FR.FR_EMAIL = MB.MB_EMAIL
-		 WHERE MB_EMAIL = #{_parameter}
+		    ON FR.FR_TO_EMAIL = MB.MB_EMAIL
+		 WHERE FR_EMAIL = #{_parameter}
 	</select>
 </mapper>

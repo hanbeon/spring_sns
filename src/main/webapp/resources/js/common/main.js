@@ -124,13 +124,17 @@ var friendFn = {
 			url     : "/friend/getFriends",
 			method  : "post",
 			success : function(result) {
+				console.log(JSON.stringify(result));
 				if ( result.friendList.length > 0 ) {
 					
 					var resultHtml  = "" ;
 					
 					$.each( result.friendList, function(i, value ){
 						resultHtml += "<li>					";
-						resultHtml += "		<div><a href=\"#\" onclick = \"javscript:webChatFn.openWebChatPopUp();\"> "+value.firstName + value.lastName + "</a></div>  ";
+						resultHtml += "		<div>			";
+						resultHtml += "			<a href=\"#\" onclick = \"javscript:webChatFn.openWebChatPopUp();\"> "+value.firstName + value.lastName + "</a>";
+						resultHtml += "			<p style=\"font-size:1px;\">"+value.toEmail+"</p>";
+						resultHtml += "		</div>"
 						resultHtml += "</li>				";
 					})
 					

@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -91,7 +92,7 @@ public class CustomAuthentiactionProvider implements AuthenticationProvider{
 		params.setFirstName( (String)resultMap.get("FirstName") );
 		params.setLastName((String)resultMap.get("LastName"));
 		params.setEmail( (String)resultMap.get("Email"));
-		
+		params.setPassword("");
 		result.setDetails(params);
 		return result;
 		

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.google.gson.JsonObject;
 import com.springSns.sns.common.CommonVO;
 import com.springSns.sns.friend.service.FriendService;
 import com.springSns.sns.friend.service.FriendVO;
@@ -123,6 +124,8 @@ public class FriendController {
 		
 		Map<Object, Object> result = new HashMap<Object, Object>();
 		result.put("friendList", params);
+		
+		Map<String, Object> sessionMap = new HashMap<String, Object>();
 		return result;
 	}
 }
