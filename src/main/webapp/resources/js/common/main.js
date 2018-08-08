@@ -29,18 +29,18 @@ var friendFn = {
 						result += "<td>"+row.email+"</td>";
 						result += "<td>"+row.firstName+"</td>";
 						result += "<td>"+row.lastName+"</td>";
-						/*if ( row.toEmail != "" ){
+						if ( row.state == "Y" || row.state == "K" ){
 							
-							 result += "<td align=\"center\">추가 요청 완료.</td>"; 
+							//result += "<td align=\"center\">추가 요청 완료.</td>"; 
 							result += "<td align=\"center\">"+
 											"<button class=\"btn btn-success btn-xs\" disabled=\"disabled\">발송 완료</button>"+
 										"</td>";
-						} else {*/
+						} else {
 							result += "<td align=\"center\">"+
 										"<button class=\"btn btn-primary btn-xs\" id=\""+row.id+"\" "+
 											"onclick=\"javascript:friendFn.addFriend('"+row.email+"','"+row.id+"');\">추가 신청</button>"+
 										"</td>";
-						//}
+						}
 						result += "</tr>";
 					})
 					

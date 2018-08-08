@@ -55,14 +55,18 @@ public class FriendServiceImpl implements FriendService{
 	@Override
 	public int addFirend(FriendVO params) throws Exception {
 		
-		params.setState("Y");
-		friendMapper.updateTempFriend(params);
 		return friendMapper.addFriend(params);
 	}
-
+	
+	@Override
+	public int updateTempFriend(FriendVO params) throws Exception {
+		return friendMapper.updateTempFriend(params);
+	}
+	
 	@Override
 	public List<FriendVO> getFriends(String email) throws Exception {
 		return friendMapper.getFriends(email);
 	}
+
 
 }

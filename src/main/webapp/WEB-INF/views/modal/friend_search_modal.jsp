@@ -38,7 +38,7 @@
 								<th>Add to friends</th>
 							</tr>
 						</thead>
-						<tbody id="friendSearchBody">
+						<tbody id="friendSearchBody" prop="bodyMessage">
 						</tbody>
 					</table>
 				</div>

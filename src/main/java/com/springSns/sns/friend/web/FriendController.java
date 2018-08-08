@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.socket.WebSocketSession;
 
-import com.google.gson.JsonObject;
 import com.springSns.sns.common.CommonVO;
 import com.springSns.sns.friend.service.FriendService;
 import com.springSns.sns.friend.service.FriendVO;
@@ -108,6 +106,12 @@ public class FriendController {
 		System.out.println("4");
 		if ( cnt == 0) {
 			System.out.println("5");
+			params.setState("Y");
+			friendService.updateTempFriend(params);
+			result = friendService.addFirend(params);
+			String tempEmail = params.getEmail();
+			params.setEmail( params.getToEmail() );
+			params.setToEmail( tempEmail );
 			result = friendService.addFirend(params);
 			System.out.println("6");
 		}

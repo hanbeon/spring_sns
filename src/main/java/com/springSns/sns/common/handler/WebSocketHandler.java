@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -16,12 +17,17 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springSns.sns.common.handler.dao.ChatDAO;
+import com.springSns.sns.common.handler.dao.ChatRoomVO;
 
 
 public class WebSocketHandler extends TextWebSocketHandler{
 
 	private Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
 	private List<WebSocketSession> wbSessionList = new ArrayList<WebSocketSession>();
+	
+	@Inject
+	private ChatDAO chatDAO;
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -34,6 +40,10 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		System.out.println(map.get("userEmail"));
 		System.out.println(mapper.writeValueAsString(map));
 		wbSessionList.add(session);
+		
+		ChatRoomVO param = new ChatRoomVO();
+		
+		chatDAO.createRoom(param);
 	}
 	
 	@Override

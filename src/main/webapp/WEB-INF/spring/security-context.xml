@@ -38,12 +38,12 @@
 			<!-- <intercept-url pattern="/WEB-INF/views/common/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
 			<!-- <intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN"/> -->
 			<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-			<form-login login-page="/login"
+			<form-login login-page="/"
 				username-parameter="loginid"
 				password-parameter="loginpw"
 				login-processing-url="/loginProcess"
 				default-target-url="/loginSuccess"
-				authentication-failure-url="/login"
+				authentication-failure-url="/"
 				always-use-default-target="true"/>
 				<!-- TODO -->
 				<csrf disabled="true"/>

@@ -1,4 +1,4 @@
-package com.springSns.sns.common.handler.service;
+package com.springSns.sns.common.handler.dao;
 
 public class ChatRoomVO {
 

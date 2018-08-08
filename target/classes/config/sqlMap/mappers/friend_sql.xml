@@ -18,14 +18,15 @@
 	</insert>
 
 	<select id="selectSearchFriends" parameterType="commonVO" resultType="friendVO">
-		SELECT mb.MB_ID         AS Id,
-			   mb.MB_FIRST_NAME AS FirstName,
-			   mb.MB_LAST_NAME  AS LastName,
-			   mb.MB_EMAIL      AS Email
+		SELECT mb.MB_ID         AS id,
+			   mb.MB_FIRST_NAME AS firstName,
+			   mb.MB_LAST_NAME  AS lastName,
+			   mb.MB_EMAIL      AS email,
+			   tf.TF_STATE      AS state
 		  FROM MEMBER mb
 	 	LEFT JOIN TEMP_FRIENDS tf
 	 		ON mb.MB_EMAIL = tf.TF_EMAIL
-            AND tf.TF_EMAIL != #{email}
+            AND tf.TF_EMAIL = #{email}
 		 WHERE 1=1
            AND mb.MB_EMAIL LIKE CONCAT(#{searchText}, '%') 
            AND mb.MB_EMAIL != #{email}
