@@ -114,6 +114,7 @@
 	
 	<select id="getFriends" parameterType="String" resultType="friendVO">
 		SELECT FR_TO_EMAIL   AS toEmail
+		      ,MB_ID AS ID
 		      ,MB_FIRST_NAME AS firstName
 		      ,MB_LAST_NAME  AS lastName
 		  FROM FRIENDS FR

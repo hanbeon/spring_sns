@@ -8,6 +8,10 @@ var friendFn = {
 		$("#searchFriendModal").modal();
 	},
 	
+	openChatMakePopUp : function() {
+		$("#chatMakeModal").modal();
+	},
+	
 	//친구 찾기
 	searchFriendAjax : function(id) {
 		var params = $("#"+id).serialize();
@@ -128,22 +132,42 @@ var friendFn = {
 				if ( result.friendList.length > 0 ) {
 					
 					var resultHtml  = "" ;
-					
-					$.each( result.friendList, function(i, value ){
+					$.each( result.friendList, function(index, row ){
+						resultHtml += "<tr id=\"tR"+row.toEmail+"\">";
+						resultHtml += "<td>"+(index+1)+"</td>";
+						resultHtml += "<td>"+row.toEmail+"</td>";
+						resultHtml += "<td>"+row.firstName+"</td>";
+						resultHtml += "<td>"+row.lastName+"</td>";
+						resultHtml += "<td align=\"center\">"+
+											"<button class=\"btn btn-success btn-xs\" id=\""+row.id+"\" email=\""+row.toEmail+"\" onclick=\"javascript:addJoinUser('"+row.id+"');\">Add</button>"+
+									   "</td>";
+						resultHtml += "</tr>";
+						/*
 						resultHtml += "<li>					";
 						resultHtml += "		<div>			";
 						resultHtml += "			<a href=\"#\" onclick = \"javscript:webChatFn.openWebChatPopUp();\"> "+value.firstName + value.lastName + "</a>";
 						resultHtml += "			<p style=\"font-size:1px;\">"+value.toEmail+"</p>";
 						resultHtml += "		</div>"
 						resultHtml += "</li>				";
+						*/
 					})
 					
-					$("#friendList").html(resultHtml);
+					$("#chatMakeFriendBody").html(resultHtml);
+					//$("#friendList").html(resultHtml);
 				}
 			},
 			error   : function(error) {
 				alert("error");
 			}
 		})
+	},
+	
+	makeChatRoom : function(){
+		console.log($("#chatMakeFriendBodyAfter"));
+		
+		var tdArr = new Array();
+		var td = $("#chatMakeFriendBodyAfter").children();
+		
+		alert('1');
 	}
 }

@@ -20,18 +20,19 @@
 			<property name="driver" value="org.mariadb.jdbc.Driver" />
 			
 			<!-- TODO :: 로컬 // 개발  -->
-			<property name="url" value="jdbc:mariadb://127.0.0.1:3306/jm_sns" />
+			<property name="url" value="jdbc:mysql://127.0.0.1:3306/jm_sns" />
+			<!-- <property name="url" value="jdbc:mariadb://127.0.0.1:3306/jm_sns" /> -->
 			<!-- <property name="url" value="jdbc:mysql://172.30.1.5:3306/jm_sns" />-->
-			<!-- 
+			
 			<property name="username" value="jm" />
 			
 			<property name="password" value="jm" />
-			 -->
 			 
+			<!--  
 			<property name="username" value="root" />
 			
 			<property name="password" value="root" />
-			
+			 -->
 		</dataSource>
 		
 		</environment>

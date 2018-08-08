@@ -12,10 +12,11 @@
 
 	var webChatFn = {
 			
-			sock : new SockJS("/webSocket"),
+			sock : "",
 			
 			openWebChatPopUp : function() {
 				$("#chatModal").modal();
+				this.sock = new SockJS("/webSocket");
 				this.sock.onmessage = this.onMessage;
 				//var sock = new SockJS('<c:url value="/webSocket"/>');
 			},

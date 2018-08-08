@@ -8,6 +8,8 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
+import com.springSns.sns.common.interceptor.ChatInterceptor;
+
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer{
@@ -19,7 +21,7 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(webSocketHandler(), "/webSocket").addInterceptors(new HttpSessionHandshakeInterceptor()).withSockJS();
+		registry.addHandler(webSocketHandler(), "/webSocket").addInterceptors(new ChatInterceptor()).withSockJS();
 		
 	}
 	
