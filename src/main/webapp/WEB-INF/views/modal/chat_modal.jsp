@@ -25,7 +25,7 @@
 			</div>
 			 -->	
 			<div class="modal-body">
-				<div class="fileinput-preview thumbnail" style="height: 300px; width: auto;" id="messageView" prop="bodyMessage">>
+				<div class="fileinput-preview thumbnail" style="height: 300px; width: auto; overflow: scroll;" id="messageView" >
 					<!-- 
 					<table class="table table-bordered responsive-table">
 					</table>

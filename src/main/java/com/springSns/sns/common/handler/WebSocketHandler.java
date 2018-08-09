@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
@@ -12,6 +15,8 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springSns.sns.chat.dao.ChatDAO;
+import com.springSns.sns.chat.service.ChatRoomVO;
 
 
 public class WebSocketHandler extends TextWebSocketHandler{
@@ -19,6 +24,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	private Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
 	private List<WebSocketSession> wbSessionList = new ArrayList<WebSocketSession>();
 	
+	@Inject
+	private ChatDAO chatDao;
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -27,8 +34,6 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		
 		logger.info("{} 접속," + session.getId() + "\t" + session.getPrincipal().getName());
 		Map<String,Object> map = session.getAttributes();
-		System.out.println("Size::"+map.size());
-		System.out.println(map.get("userEmail"));
 		System.out.println(mapper.writeValueAsString(map));
 		wbSessionList.add(session);
 	}
@@ -42,14 +47,22 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 
-		logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
+		String openWebChatId = (String) session.getAttributes().get("openWebChatId");
+		logger.info("채팅 오픈 Id :: {}", openWebChatId);
+		List<ChatRoomVO> getChatJoinUser = chatDao.getChatJoinUser(openWebChatId);
 		
-		System.out.println("#### " + session.getAttributes().get("openWebChatId"));
+		logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
 		
 		logger.info("User Name :: {}",session.getPrincipal().getName());
 		
 		for ( WebSocketSession sess : wbSessionList ) {
-			sess.sendMessage(new TextMessage(session.getPrincipal().getName()+ " | " + message.getPayload()));
+			
+			for ( ChatRoomVO param : getChatJoinUser ) {
+				if ( param.getChatUserEmail().equals(sess.getPrincipal().getName()) && param.getChatRoomId().equals(openWebChatId) ){
+					
+					sess.sendMessage(new TextMessage(session.getPrincipal().getName()+ " | " + message.getPayload()));
+				}
+			}
 		}
 	}
 	

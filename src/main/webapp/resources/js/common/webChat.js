@@ -47,14 +47,8 @@
 				
 				//openChatId 저장
 				$.ajax({
-					url		:	"/chat/openWebChatId"
-				   ,data	:	{ "openChatId" : p_openChatId}
-				   ,success : function(){
-					   
-				   },
-				   error    :  function(){
-					   
-				   }
+					 url		:	"/chat/openWebChatId"
+					,data		:	{ "openChatId" : p_openChatId}
 				})
 				
 				$("#chatModal").modal();

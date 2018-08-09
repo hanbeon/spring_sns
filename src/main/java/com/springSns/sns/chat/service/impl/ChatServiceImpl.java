@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springSns.sns.chat.service.ChatRoomVO;
 import com.springSns.sns.chat.service.ChatService;
@@ -19,6 +20,7 @@ public class ChatServiceImpl implements ChatService{
 	private ChatMapper chatMapper;
 	
 	@Override
+	@Transactional
 	public void createChatRoom(List< Map<String, Object> > params) throws Exception{
 		
 		String chatRoomId = CommonUtil.makeChatRoomId();

@@ -61,5 +61,12 @@
 		   AND  CJE.cje_email = #{_parameter}
 		
 	</select>
+	
+	<select id="getChatJoinUser" parameterType="String" resultType="chatRoomVO">
+		SELECT cje_email           AS chatUserEmail
+		       ,cje_room_id         AS chatRoomId
+		  FROM chat_join_entry
+		 WHERE cje_room_id = #{_parameter}
+	</select>
 	 
 </mapper>

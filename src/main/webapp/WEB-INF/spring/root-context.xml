@@ -48,6 +48,10 @@
 		<property name="configLocation" value="classpath:/config/sqlMap/sql-mapper-config.xml"/>
 		<property name="mapperLocations" value="classpath:/config/sqlMap/mappers/*.xml"/>
 	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
 		
 	<!-- SQL Mapper 설정 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

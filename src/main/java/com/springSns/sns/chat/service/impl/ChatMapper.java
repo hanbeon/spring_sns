@@ -16,4 +16,7 @@ public interface ChatMapper {
 	public void insertChatRoomJoinUser(ChatRoomVO param) throws Exception;
 	
 	public List<ChatRoomVO> getWebChatList(String p_userEmail) throws Exception;
+	
+	public List<ChatRoomVO> getChatJoinUser(String p_openWebChatId) throws Exception;
+
 }
