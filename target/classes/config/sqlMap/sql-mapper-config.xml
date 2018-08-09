@@ -12,5 +12,6 @@
 		<typeAlias alias="postVO"   type="com.springSns.sns.main.service.PostVO"/>
 		<typeAlias alias="commonVO" type="com.springSns.sns.common.CommonVO"/>
 		<typeAlias alias="friendVO" type="com.springSns.sns.friend.service.FriendVO"/>
+		<typeAlias alias="chatRoomVO" type="com.springSns.sns.chat.service.ChatRoomVO"/>
 	</typeAliases>
 </configuration>

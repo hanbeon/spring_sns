@@ -21,7 +21,7 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(webSocketHandler(), "/webSocket").addInterceptors(new ChatInterceptor()).withSockJS();
+		registry.addHandler(webSocketHandler(), "/webSocket?aa=\"sdsd\"").addInterceptors(new ChatInterceptor()).withSockJS();
 		
 	}
 	

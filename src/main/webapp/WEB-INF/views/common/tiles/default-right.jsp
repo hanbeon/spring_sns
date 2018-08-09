@@ -51,12 +51,12 @@
 	function addJoinUser(id){
 		$("#"+id).attr("disabled", "true");
 		var resultHtml = "<tr>";
-			resultHtml += "	<td>";
-			resultHtml += 		id;
-			resultHtml += "	</td>";
-			resultHtml += "	<td>";
-			resultHtml += 		$("#"+id).attr("email");
-			resultHtml += "	</td>";
+			resultHtml += "<td>";
+			resultHtml +=id;
+			resultHtml += "</td>";
+			resultHtml += "<td>";
+			resultHtml +=$("#"+id).attr("email");
+			resultHtml += "</td>";
 			resultHtml += "<tr>";
 		$("#chatMakeFriendBodyAfter").append(resultHtml);
 	}

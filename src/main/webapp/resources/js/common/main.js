@@ -166,8 +166,35 @@ var friendFn = {
 		console.log($("#chatMakeFriendBodyAfter"));
 		
 		var tdArr = new Array();
-		var td = $("#chatMakeFriendBodyAfter").children();
-		
+		var td = $("#chatMakeFriendBodyAfter").children().find('td');
+		var obj = new Object();
+		var objArr = new Array();
+		var tempStr = "";
+		td.each(function(index){
+			console.log("INDEX :: " + index);
+			console.log(td.eq(index).text());
+			
+			if ( index % 2 != 0 ) {
+				tempStr += ","+td.eq(index).text()+"/";
+			} else {
+				tempStr += td.eq(index).text();
+			}
+			/*if (td.eq(index).text() == ""){
+				
+			}else{
+				
+				obj.id = td.eq(index).text();
+				obj.name="2";
+			}*/
+			
+		})
+		console.log(tempStr);
+		var tempArr = tempStr.split("/");
+		for ( var i = 0; i < tempArr.length; i++ ) {
+			
+		}
+		console.log("!!! tempARr" + JSON.stringify(tempArr));
+		console.log("%%%%%%%%%% " + JSON.stringify(objArr));
 		alert('1');
 	}
 }
