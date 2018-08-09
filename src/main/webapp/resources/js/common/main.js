@@ -163,38 +163,44 @@ var friendFn = {
 	},
 	
 	makeChatRoom : function(){
-		console.log($("#chatMakeFriendBodyAfter"));
 		
 		var tdArr = new Array();
 		var td = $("#chatMakeFriendBodyAfter").children().find('td');
-		var obj = new Object();
 		var objArr = new Array();
 		var tempStr = "";
 		td.each(function(index){
-			console.log("INDEX :: " + index);
-			console.log(td.eq(index).text());
-			
+				
 			if ( index % 2 != 0 ) {
 				tempStr += ","+td.eq(index).text()+"/";
 			} else {
 				tempStr += td.eq(index).text();
 			}
-			/*if (td.eq(index).text() == ""){
-				
-			}else{
-				
-				obj.id = td.eq(index).text();
-				obj.name="2";
-			}*/
 			
 		})
-		console.log(tempStr);
+
 		var tempArr = tempStr.split("/");
 		for ( var i = 0; i < tempArr.length; i++ ) {
 			
+			var tempSplit = tempArr[i].split(",");
+			var obj = new Object();
+			obj.id = tempSplit[0];
+			obj.email = tempSplit[1];
+			objArr.push(obj);
+			
 		}
-		console.log("!!! tempARr" + JSON.stringify(tempArr));
-		console.log("%%%%%%%%%% " + JSON.stringify(objArr));
-		alert('1');
+
+		$.ajax({
+			url		:	"/chat/createChatRoom",
+			method	:	"post",
+			dataType:	"json",
+			contentType : "application/json; charset=UTF-8",
+			data	:	JSON.stringify(objArr),
+			success : function(result){
+				alert('채팅방 개설 완료');
+			},
+			error	: function(error){
+				alert('error');
+			}
+		})
 	}
 }

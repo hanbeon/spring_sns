@@ -1,5 +1,7 @@
 package com.springSns.sns.chat.service;
 
+import java.util.List;
+
 public class ChatRoomVO {
 
 	private int chatRoomSeq;
@@ -16,7 +18,8 @@ public class ChatRoomVO {
 	private String chatRoomType;
 	
 	//person
-	private String chatEmail;
+	private List<String> chatJoinEmail;
+	private String chatUserEmail;
 	
 	public int getChatRoomSeq() {
 		return chatRoomSeq;
@@ -66,18 +69,24 @@ public class ChatRoomVO {
 	public void setChatRoomType(String chatRoomType) {
 		this.chatRoomType = chatRoomType;
 	}
-	public String getChatEmail() {
-		return chatEmail;
+	public String getChatUserEmail() {
+		return chatUserEmail;
 	}
-	public void setChatEmail(String chatEmail) {
-		this.chatEmail = chatEmail;
+	public void setChatUserEmail(String chatUserEmail) {
+		this.chatUserEmail = chatUserEmail;
+	}
+	public List<String> getChatJoinEmail() {
+		return chatJoinEmail;
+	}
+	public void setChatJoinEmail(List<String> chatJoinEmail) {
+		this.chatJoinEmail = chatJoinEmail;
 	}
 	@Override
 	public String toString() {
 		return "ChatRoomVO [chatRoomSeq=" + chatRoomSeq + ", chatRoomId=" + chatRoomId + ", chatMessage=" + chatMessage
 				+ ", chatWriter=" + chatWriter + ", chatRegDT=" + chatRegDT + ", chatName=" + chatName
-				+ ", chatParticipantCnt=" + chatParticipantCnt + ", chatRoomType=" + chatRoomType + ", chatEmail="
-				+ chatEmail + ", toString()=" + super.toString() + "]";
+				+ ", chatParticipantCnt=" + chatParticipantCnt + ", chatRoomType=" + chatRoomType + ", chatJoinEmail="
+				+ chatJoinEmail + ", chatUserEmail=" + chatUserEmail + ", toString()=" + super.toString() + "]";
 	}
 	
 	

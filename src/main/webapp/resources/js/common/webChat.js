@@ -14,7 +14,49 @@
 			
 			sock : "",
 			
-			openWebChatPopUp : function() {
+			getWebChatList : function() {
+				$.ajax({
+					url		:	"/chat/getWebChatList",
+					success	: function(result) {
+						console.log(JSON.stringify(result));
+						
+						var resultHtml ="";
+						if ( result.length > 0 ) {
+							
+							$.each(result, function(index, value){
+								
+								resultHtml += "<li>					";
+								resultHtml += "		<div>			";
+								resultHtml += "			<a href=\"#\" onclick = \"javscript:webChatFn.openWebChatPopUp('"+value.chatRoomId+"');\"> "+value.chatName + "</a>";
+								resultHtml += "			<p style=\"font-size:1px;\">"+value.chatRoomId+"</p>";
+								resultHtml += "		</div>"
+								resultHtml += "</li>				";
+							})
+						} else {
+							
+						}
+						$("#chatRoomList").html(resultHtml);
+					},
+					error 	: function(error) {
+						alert("error");
+					}
+				})
+			},
+			
+			openWebChatPopUp : function(p_openChatId) {
+				
+				//openChatId 저장
+				$.ajax({
+					url		:	"/chat/openWebChatId"
+				   ,data	:	{ "openChatId" : p_openChatId}
+				   ,success : function(){
+					   
+				   },
+				   error    :  function(){
+					   
+				   }
+				})
+				
 				$("#chatModal").modal();
 				this.sock = new SockJS("/webSocket");
 				this.sock.onmessage = this.onMessage;

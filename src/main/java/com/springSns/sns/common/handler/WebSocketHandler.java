@@ -44,6 +44,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 
 		logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
 		
+		System.out.println("#### " + session.getAttributes().get("openWebChatId"));
+		
 		logger.info("User Name :: {}",session.getPrincipal().getName());
 		
 		for ( WebSocketSession sess : wbSessionList ) {

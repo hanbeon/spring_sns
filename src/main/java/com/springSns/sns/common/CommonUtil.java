@@ -2,6 +2,7 @@ package com.springSns.sns.common;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -43,6 +44,13 @@ public class CommonUtil {
 			
 			throw new RuntimeException();
 		}
+	}
+	
+	
+	public static String makeChatRoomId() {
+		
+		String result = "chat"+UUID.randomUUID().toString().replaceAll("-", "").toUpperCase().substring(0, 11);
+		return result;
 	}
 	
 }

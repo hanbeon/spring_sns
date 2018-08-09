@@ -11,7 +11,8 @@
 	<button id="searchFriend" class="btn btn-metis-1 btn-xs btn-round btn-line">Search Friend</button>
 	<button id="chatMakeBtn" class="btn btn-metis-1 btn-xs btn-round btn-line">Chat Make</button>
 	<div class="media user-media bg-dark dker">
-		<ul class="friend-ul"  id="friendList">
+		<!-- <ul class="friend-ul"  id="friendList"> -->
+		<ul class="friend-ul"  id="chatRoomList">
 		<!-- 
 			<li>
 				<div>sss</div>
@@ -31,6 +32,8 @@
 	$(document).ready(function(){
 		
 		//friendFn.getFriends();
+		
+			webChatFn.getWebChatList();
 		
 		$("#searchFriend").on("click",function(){
 			

@@ -53,6 +53,10 @@
 						</thead>
 						<h2>ADD</h2>
 						<tbody id="chatMakeFriendBodyAfter">
+							<tr>
+								<td>${sessionScope.userId}</td>
+								<td>${sessionScope.userEmail}</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

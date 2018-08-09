@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springSns.sns.chat.service.impl.ChatMapper">
-	<insert id="createChatRoom" parameterType="chatRoomVO">
+	<insert id="insertChatRoom" parameterType="chatRoomVO">
+		INSERT INTO CHAT_ROOM
+		       ( 
+		         cr_id
+		        )
+		VALUES (
+		         #{chatRoomId}  
+		        )
 	</insert>
+	
+	<insert id="insertChatRoomOption" parameterType="chatRoomVO">
+		INSERT INTO CHAT_OPTION
+		       (
+		          co_room_id	
+		         ,co_room_name
+		         ,co_participant_cnt
+		         <if test="chatRoomType != null">
+		         	,co_room_type 
+		         </if>
+		        )
+		VALUES
+		       ( 
+		          #{chatRoomId}
+		         ,#{chatName}
+		         ,#{chatParticipantCnt}
+		         <if test="chatRoomType != null">
+		         	,#{chatRoomType}
+		         </if>
+		        )
+	
+	</insert>
+	
+	<insert id="insertChatRoomJoinUser" parameterType="chatRoomVO">
+		INSERT INTO CHAT_JOIN_ENTRY
+		       ( 
+		          cje_room_id
+		         ,cje_email
+		       )
+		values
+		      (
+		          #{chatRoomId}
+		         ,#{chatUserEmail}
+		      )
+		
+	</insert>
+	
+	<select id="getWebChatList" parameterType="String" resultType="chatRoomVO">
+		SELECT  CJE.cje_room_id          AS chatRoomId
+		        ,CJE.cje_email           AS chatUserEmail
+		        ,CO.co_room_name         AS chatName
+		        ,CO.co_participant_cnt   AS chatParticipantCnt
+		   FROM CHAT_JOIN_ENTRY CJE
+		  INNER JOIN CHAT_OPTION CO
+		     ON CJE.cje_room_id = CO.co_room_id
+		  WHERE CJE.cje_room_id = ANY(
+		  							SELECT cje_room_id FROM chat_join_entry WHERE cje_email=#{_parameter}
+		                          )
+		   AND  CJE.cje_email = #{_parameter}
+		
+	</select>
+	 
 </mapper>
