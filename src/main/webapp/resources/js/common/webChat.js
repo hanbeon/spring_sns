@@ -8,12 +8,13 @@
 			console.log("send message..");
 			webChatFn.sendMessage();
 		})
+		
 	});
 
 	var webChatFn = {
 			
 			sock : "",
-			
+			openChatId :"", 
 			getWebChatList : function() {
 				$.ajax({
 					url		:	"/chat/getWebChatList",
@@ -50,7 +51,7 @@
 					 url		:	"/chat/openWebChatId"
 					,data		:	{ "openChatId" : p_openChatId}
 				})
-				
+				webChatFn.openChatId = p_openChatId;
 				$("#chatModal").modal();
 				this.sock = new SockJS("/webSocket");
 				this.sock.onmessage = this.onMessage;
@@ -67,27 +68,29 @@
 				
 				var strArray = data.split("|");
 				
-				$.each(strArray , function(index, value){
-					console.log("str["+index+"]" + value);
-				})
-				
-				var currentuser_session =  $("#sessionId").val();
-				console.log("current : "  + currentuser_session);
-				sessionid = strArray[0];
-				message = strArray[1];
-				
-				var printHtml = "";
-				if ( sessionid.trim() == currentuser_session.trim() ) {
+				if ( webChatFn.openChatId == strArray[2].trim() ){
+					
+					var currentuser_session =  $("#sessionId").val();
+					
+					sessionid = strArray[0];
+					message = strArray[1];
+					
+					var printHtml = "";
+					if ( sessionid.trim() == currentuser_session.trim() ) {
 						printHtml = "<p style=\"color:  #CCA63D;\" >";
 						printHtml+= "	<strong>[ ME ] -> " + message+"</strong>";
 						printHtml+= "</p>";
-				} else {
-					printHtml = "<p>";
-					printHtml+= "	<strong>["+sessionid+"] -> " + message+"</strong>";
-					printHtml+= "</p>";
+					} else {
+						printHtml = "<p>";
+						printHtml+= "	<strong>["+sessionid+"] -> " + message+"</strong>";
+						printHtml+= "</p>";
+					}
+					$("#messageView").append(printHtml);
 				}
-				$("#messageView").append(printHtml);
 				
+			},
+			connectClose : function(){
+				this.sock.close();
 			}
 	} 
 

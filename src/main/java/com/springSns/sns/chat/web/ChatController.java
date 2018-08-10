@@ -32,9 +32,10 @@ public class ChatController {
 	private static Logger logger = LoggerFactory.getLogger(ChatController.class);
 	
 	@RequestMapping(value="/openWebChatId")
-	public void openWebChatId(HttpServletRequest reqeust, @RequestParam(value="openChatId") String p_openChatId ) {
-		System.out.println("OPENCHATID :: " + p_openChatId);
+	public @ResponseBody void openWebChatId(HttpServletRequest reqeust, @RequestParam(value="openChatId") String p_openChatId ) {
+		System.out.println("=================OPENCHATID :: " + p_openChatId);
 		reqeust.getSession().setAttribute("openWebChatId", p_openChatId);
+		System.out.println("=================SETSESSION :: " + reqeust.getSession().getAttribute("openWebChatId"));
 	}
 	
 	@RequestMapping(value="/getWebChatList")

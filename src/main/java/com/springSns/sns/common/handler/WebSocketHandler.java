@@ -58,9 +58,9 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		for ( WebSocketSession sess : wbSessionList ) {
 			
 			for ( ChatRoomVO param : getChatJoinUser ) {
-				if ( param.getChatUserEmail().equals(sess.getPrincipal().getName()) && param.getChatRoomId().equals(openWebChatId) ){
+				if ( param.getChatUserEmail().equals(sess.getPrincipal().getName()) ){
 					
-					sess.sendMessage(new TextMessage(session.getPrincipal().getName()+ " | " + message.getPayload()));
+					sess.sendMessage(new TextMessage(session.getPrincipal().getName()+ " | " + message.getPayload()+ " | " + openWebChatId));
 				}
 			}
 		}

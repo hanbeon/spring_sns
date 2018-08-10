@@ -46,8 +46,13 @@
 		});
 		
 		$('.modal').on('hidden.bs.modal', function (e) {
+			
+			var $id = $(this).attr("id");
+			if ( $id == "chatModal") {
+				webChatFn.connectClose();
+			}
 		    console.log('modal close');
-		  $(this).find('form')[0].reset()
+		  //$(this).find('form')[0].reset()
 		});
 	})
 	

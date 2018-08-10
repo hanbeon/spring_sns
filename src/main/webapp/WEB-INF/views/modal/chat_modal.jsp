@@ -11,25 +11,9 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<h5 class="modal-title" id="chatModalLabel"><span>대화</span></h5>
-			</div>
-			<!-- 
-			<div class="modal-body">
-				<div class="from-group">
-					<label class="control-label col-lg-3">검색</label>
-					<div class="col-lg-5">
-						<div class="input-group">
-						
-						</div>
-					</div>
-				</div>
-			</div>
-			 -->	
+			</div>	
 			<div class="modal-body">
 				<div class="fileinput-preview thumbnail" style="height: 300px; width: auto; overflow: scroll;" id="messageView" >
-					<!-- 
-					<table class="table table-bordered responsive-table">
-					</table>
-					 -->
 				</div>
 			</div>
 				
