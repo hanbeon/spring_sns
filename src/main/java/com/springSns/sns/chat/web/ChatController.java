@@ -31,11 +31,19 @@ public class ChatController {
 	
 	private static Logger logger = LoggerFactory.getLogger(ChatController.class);
 	
-	@RequestMapping(value="/openWebChatId")
-	public @ResponseBody void openWebChatId(HttpServletRequest reqeust, @RequestParam(value="openChatId") String p_openChatId ) {
-		System.out.println("=================OPENCHATID :: " + p_openChatId);
+	@RequestMapping(value="/getChatLog")
+	public @ResponseBody Object getChatLog(HttpServletRequest reqeust, 
+			@RequestParam(value="openChatId") String p_openChatId ) throws Exception{
+		System.out.println("========================================================" + p_openChatId);
 		reqeust.getSession().setAttribute("openWebChatId", p_openChatId);
-		System.out.println("=================SETSESSION :: " + reqeust.getSession().getAttribute("openWebChatId"));
+		
+		List<ChatRoomVO> chatLogList = chatService.getChatLogList(p_openChatId);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put("chatLogList", chatLogList);
+		
+		return resultMap;
 	}
 	
 	@RequestMapping(value="/getWebChatList")

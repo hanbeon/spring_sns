@@ -19,7 +19,6 @@
 				$.ajax({
 					url		:	"/chat/getWebChatList",
 					success	: function(result) {
-						console.log(JSON.stringify(result));
 						
 						var resultHtml ="";
 						if ( result.length > 0 ) {
@@ -48,8 +47,33 @@
 				
 				//openChatId 저장
 				$.ajax({
-					 url		:	"/chat/openWebChatId"
+					 url		:	"/chat/getChatLog"
 					,data		:	{ "openChatId" : p_openChatId}
+					,success  : function(result){
+						
+						$("#messageView").html('');
+						if ( result.chatLogList.length > 0 ) {
+							
+							var printHtml = "";
+							$.each(result.chatLogList, function(index,value){
+								
+								if ( value.chatWriter.trim() == $("#sessionId").val().trim() ) {
+									
+									printHtml+= "<p style=\"color:  #CCA63D;\" >";
+									printHtml+= "	<strong>[ ME ] -> " + value.chatMessage+"</strong>";
+									printHtml+= "</p>";
+									
+								} else{
+									
+									printHtml+= "<p>";
+									printHtml+= "	<strong>["+value.chatWriter+"] -> " + value.chatMessage +"</strong>";
+									printHtml+= "</p>";
+								}
+							})
+							
+							$("#messageView").append(printHtml);
+						}
+					}
 				})
 				webChatFn.openChatId = p_openChatId;
 				$("#chatModal").modal();

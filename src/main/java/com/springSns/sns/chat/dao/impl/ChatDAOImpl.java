@@ -23,4 +23,9 @@ public class ChatDAOImpl implements ChatDAO{
 		return sqlSession.selectList(NAME_SAPCE+".getChatJoinUser", p_openWebChatId);
 	}
 
+	@Override
+	public void insetChat(ChatRoomVO param) throws Exception {
+		sqlSession.insert(NAME_SAPCE+".insertChat", param);
+	}
+
 }

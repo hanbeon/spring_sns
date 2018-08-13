@@ -40,8 +40,8 @@ public class ChatServiceImpl implements ChatService{
 		//ChatRoom 개설
 		chatMapper.insertChatRoom(vo);
 		
-		
-		vo.setChatName(tempList.get(0)+" 외 "+ (tempList.size()-1) +"명");
+		String chatName = tempList.size() > 2 ? tempList.get(0)+" 외 "+ (tempList.size()-1) +"명" : tempList.get(1)+" 채팅방";
+		vo.setChatName(chatName);
 		vo.setChatParticipantCnt(tempList.size());
 		//ChatRoom 관련 설정 정보 
 		chatMapper.insertChatRoomOption(vo);
@@ -58,6 +58,12 @@ public class ChatServiceImpl implements ChatService{
 	public List<ChatRoomVO> getWebChatList(String p_userEmail) throws Exception {
 		
 		return chatMapper.getWebChatList(p_userEmail);
+	}
+
+	@Override
+	public List<ChatRoomVO> getChatLogList(String p_chatRoomId) throws Exception {
+		
+		return chatMapper.getChatLogList(p_chatRoomId);
 	}
 
 }

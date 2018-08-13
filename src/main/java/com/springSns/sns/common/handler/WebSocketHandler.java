@@ -53,6 +53,14 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		
 		logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
 		
+		ChatRoomVO logParam = new ChatRoomVO();
+		
+		//채팅 로그 작성
+		logParam.setChatRoomId(openWebChatId);
+		logParam.setChatMessage(message.getPayload());
+		logParam.setChatWriter(session.getPrincipal().getName());
+		chatDao.insetChat(logParam);
+		
 		logger.info("User Name :: {}",session.getPrincipal().getName());
 		
 		for ( WebSocketSession sess : wbSessionList ) {

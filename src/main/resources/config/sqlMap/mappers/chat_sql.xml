@@ -68,5 +68,29 @@
 		  FROM chat_join_entry
 		 WHERE cje_room_id = #{_parameter}
 	</select>
+	
+	<insert id="insertChat" parameterType="chatRoomVO">
+		INSERT INTO CHAT_LOG
+		       (
+		         cl_room_id
+		        ,cl_message
+		        ,cl_writer
+		        ,cl_reg_dt
+		       )
+		VALUES
+		       (
+		         #{chatRoomId}
+		        ,#{chatMessage}
+		        ,#{chatWriter}
+		        ,now()
+		       )
+	</insert>
+	
+	<select id="getChatLogList" parameterType="String" resultType="chatRoomVO">
+		SELECT  cl_message AS chatMessage
+		       ,cl_writer  AS chatWriter
+		  FROM  CHAT_LOG
+		 WHERE  cl_room_id = #{_parameter}
+	</select>
 	 
 </mapper>
